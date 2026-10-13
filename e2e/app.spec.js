@@ -1,5 +1,11 @@
 const { test, expect } = require('@playwright/test');
+const { AxeBuilder } = require('@axe-core/playwright');
 const fs = require('node:fs');
+const path = require('node:path');
+
+// Read from the source so a version bump does not need a matching edit here.
+const APP_VERSION = fs.readFileSync(path.resolve(__dirname, '../public/js/home.js'), 'utf8')
+  .match(/const APP_VERSION = '([^']+)'/)[1];
 
 async function addLearner(page, name = 'Ola') {
   await page.goto('/');
@@ -289,6 +295,23 @@ test('the app is installable and works offline', async ({ page, context }) => {
   }
 });
 
+test('the home page carries a link preview with a large image', async ({ page, request }) => {
+  await page.goto('/');
+  const meta = name => page.locator(`meta[property="${name}"], meta[name="${name}"]`);
+  await expect(meta('og:title')).toHaveAttribute('content', await page.title());
+  await expect(meta('og:description')).toHaveAttribute('content', await meta('description').getAttribute('content'));
+  await expect(meta('og:url')).toHaveAttribute('content', 'https://divideconquer.tinkered.app/');
+  await expect(meta('twitter:card')).toHaveAttribute('content', 'summary_large_image');
+
+  const image = new URL(await meta('og:image').getAttribute('content'));
+  expect(image.origin).toBe('https://divideconquer.tinkered.app');
+  const response = await request.get(image.pathname);
+  expect(response.headers()['content-type']).toBe('image/png');
+  // Width and height sit at bytes 16 to 23 of a PNG.
+  const png = await response.body();
+  expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual([1200, 630]);
+});
+
 test('the footer credits Kuba and the page logs no errors', async ({ page }) => {
   const outside = [];
   const errors = [];
@@ -301,7 +324,7 @@ test('the footer credits Kuba and the page logs no errors', async ({ page }) => 
   expect(response.headers()['content-security-policy']).toContain("default-src 'self'");
   await addLearner(page);
   const credit = page.locator('.footer-credit');
-  await expect(credit).toHaveText('Divide & Conquer v1.00 by Kuba · tinkered.app · Privacy');
+  await expect(credit).toHaveText(`Divide & Conquer v${APP_VERSION} by Kuba · tinkered.app · Privacy`);
   await expect(credit.getByRole('link', { name: 'Kuba' })).toHaveAttribute('href', 'mailto:kuba@tinkered.app');
   await expect(credit.getByRole('link', { name: 'tinkered.app' })).toHaveAttribute('href', 'https://tinkered.app');
   await expect(credit.getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', 'privacy.html');
@@ -337,6 +360,47 @@ test('the footer links to a privacy page that search engines skip', async ({ pag
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator('.footer-credit').getByRole('link', { name: 'Prywatność' })).toBeVisible();
 });
+
+// The desktop and mobile projects cover both layouts; this covers both themes.
+for (const theme of ['light', 'dark']) {
+  test(`axe finds no accessibility violations in the ${theme} theme`, async ({ page }) => {
+    // Reduced motion ends the tile fade-in at once, so contrast is measured on the final colours.
+    await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
+    const scan = async view => {
+      await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+      const { violations } = await new AxeBuilder({ page }).analyze();
+      const found = violations.flatMap(violation =>
+        violation.nodes.map(node => `${violation.id}: ${node.target.join(' ')}`));
+      expect(found, view).toEqual([]);
+    };
+
+    await page.goto('/');
+    await expect(page.getByRole('dialog', { name: 'Who is practising?' })).toBeVisible();
+    await scan('learner picker');
+    await addLearner(page);
+    await scan('home');
+
+    for (const practice of ['/multiplication/', '/division/', '/missing-factor/']) {
+      await page.goto(practice);
+      await expect(page.locator('#question')).not.toBeEmpty();
+      await scan(practice);
+    }
+    for (const review of ['/review-multiply/', '/review-divide/']) {
+      await page.goto(review);
+      await expect(page.locator('.review-grid .cell').first()).toBeVisible();
+      await scan(review);
+    }
+    await page.goto('/progress/');
+    await expect(page.getByRole('group', { name: 'Practice type' })).toBeVisible();
+    await scan('/progress/');
+    await page.locator('#mult-grid .cell').first().click();
+    await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
+    await scan('/progress/ fact detail');
+    await page.goto('/privacy');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await scan('/privacy');
+  });
+}
 
 test('the privacy page is sent with a noindex header', async ({ request }) => {
   for (const url of ['/privacy', '/privacy.html']) {

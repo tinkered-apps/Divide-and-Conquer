@@ -1,6 +1,6 @@
 (() => {
   // Version shown in the footer; CACHE in sw.js carries the same number (see AGENTS.md).
-  const APP_VERSION = '1.00';
+  const APP_VERSION = '1.01';
   document.getElementById('app-version').textContent = 'v' + APP_VERSION;
 
   const picker = document.getElementById('auth-modal');

@@ -3,11 +3,11 @@
 ## Commands
 
 ```bash
-npm install                       # dev dependencies only (wrangler, @playwright/test)
+npm install                       # dev dependencies only (wrangler, @playwright/test, @axe-core/playwright)
 npx playwright install chromium   # once, before the first e2e run
 npm start                         # wrangler dev on http://localhost:40451
 npm test                          # unit tests (node:test): mastery, scheduler, store, backups, i18n, version
-npm run test:e2e                  # Playwright, desktop and mobile
+npm run test:e2e                  # Playwright, desktop and mobile, with an axe scan of every page in both themes
 npm run deploy                    # unit tests, then wrangler deploy
 ```
 
@@ -70,6 +70,9 @@ current language. The page is `noindex` (meta tag and `X-Robots-Tag` in `_header
   has never opened. Any file a page loads (HTML, CSS, JS, fonts, icons) must be in `SHELL`; files used
   only at install time, such as the maskable icon, do not need to be. Pages, scripts and styles are
   network-first, fonts and images cache-first.
+- **Link preview:** the `og:*` tags in `public/index.html` point to `public/icons/social-card.png`
+  (1200×630). Crawlers do not run scripts, so the tags are static English with absolute URLs, and the
+  image is not in `SHELL` because no page loads it.
 - **Security headers:** `public/_headers` sets a strict CSP (`script-src 'self'`): no inline scripts,
   no external origins. Inline styles are allowed.
 

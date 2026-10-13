@@ -2,7 +2,7 @@
 // first so a deploy shows up immediately, with the cache as the offline
 // fallback. Fonts, icons and images are served from the cache. CACHE carries
 // APP_VERSION from js/home.js; bump both together (see AGENTS.md).
-const CACHE = 'divide-and-conquer-v1.00';
+const CACHE = 'divide-and-conquer-v1.01';
 
 const SHELL = [
   '/',
