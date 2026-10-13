@@ -38,7 +38,7 @@ It is a private, non-commercial hobby project. Learner data never leaves the bro
 only the host (Cloudflare), which is why it needs no terms, provider details or cookie banner. Accounts,
 a backend storing user data, analytics, ads, payments or any third-party request would change that and
 need a new legal check first (`audyt-prawny-pl` skill; the shared publisher profile is in
-`C:\GIT Repos\.tinkered-legal\`). The footer credit "Divide & Conquer vX.XX by Kuba · tinkered.app ·
+`../.tinkered-legal/`, outside this repository). The footer credit "Divide & Conquer vX.XX by Kuba · tinkered.app ·
 Privacy" links Kuba to `mailto:kuba@tinkered.app`, tinkered.app to `https://tinkered.app` and Privacy to
 `privacy.html`. The tinkered.app logo is inlined in `public/index.html`, so nothing loads from another
 origin.
