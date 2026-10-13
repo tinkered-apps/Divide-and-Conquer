@@ -2,7 +2,22 @@
   <img src="public/icons/social-card.png" alt="The Divide &amp; Conquer name next to four tiles: 7 × 8, 56 ÷ 7, 7 × _ = 56 and a progress grid." width="760">
 </p>
 
-# Divide & Conquer
+<h1 align="center">Divide &amp; Conquer</h1>
+
+<p align="center">
+  <b>Times tables that stick. A few minutes a day.</b><br>
+  Spaced-repetition practice for multiplication and division, for primary-school children.
+</p>
+
+<p align="center">
+  <a href="https://divideconquer.tinkered.app/"><b>▶ Practise</b></a>
+  &nbsp;·&nbsp; English and Polish
+  &nbsp;·&nbsp; installs as an app
+  &nbsp;·&nbsp; works offline
+  &nbsp;·&nbsp; no account
+</p>
+
+---
 
 A spaced-repetition trainer for times tables and division, for primary-school children. Live at
 <https://divideconquer.tinkered.app>. English by default, Polish behind the flag toggle.
