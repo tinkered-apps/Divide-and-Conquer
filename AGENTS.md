@@ -3,10 +3,10 @@
 ## Commands
 
 ```bash
-npm install                       # dev dependencies only (wrangler, @playwright/test, @axe-core/playwright)
+npm install                       # dev dependencies only (wrangler, @playwright/test, @axe-core/playwright, eslint)
 npx playwright install chromium   # once, before the first e2e run
 npm start                         # wrangler dev on http://localhost:40451
-npm test                          # unit tests (node:test): mastery, scheduler, store, backups, i18n, version
+npm test                          # ESLint (eslint.config.mjs), then unit tests (node:test): mastery, scheduler, store, backups, i18n, version
 npm run test:e2e                  # Playwright, desktop and mobile, with an axe scan of every page in both themes
 npm run deploy                    # unit tests, then wrangler deploy
 ```
