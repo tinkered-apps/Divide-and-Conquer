@@ -299,7 +299,8 @@ test('the home page carries a link preview with a large image', async ({ page, r
   await page.goto('/');
   const meta = name => page.locator(`meta[property="${name}"], meta[name="${name}"]`);
   await expect(meta('og:title')).toHaveAttribute('content', await page.title());
-  await expect(meta('og:description')).toHaveAttribute('content', await meta('description').getAttribute('content'));
+  // The same line is drawn on the social card.
+  await expect(meta('og:description')).toHaveAttribute('content', 'Times tables that stick. A few minutes a day.');
   await expect(meta('og:url')).toHaveAttribute('content', 'https://divideconquer.tinkered.app/');
   await expect(meta('twitter:card')).toHaveAttribute('content', 'summary_large_image');
 
