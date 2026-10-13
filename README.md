@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/icons/social-card.png" alt="The Divide &amp; Conquer name next to four tiles: 7 × 8, 56 ÷ 7, 7 × _ = 56 and a progress grid." width="760">
+</p>
+
 # Divide & Conquer
 
 A spaced-repetition trainer for times tables and division, for primary-school children. Live at
