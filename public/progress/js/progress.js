@@ -89,7 +89,7 @@
       ['learned', 'remembered'],
       ['review', 'review due'],
       ['learning', 'learning'],
-      ['none', 'not practised'],
+      ['none', 'not practiced'],
     ].map(([status, label]) => `
       <div class="stat-chip">
         <div class="num num-${status}">${counts[status]}</div>

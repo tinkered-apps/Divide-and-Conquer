@@ -59,13 +59,13 @@ current language. The page is `noindex` (meta tag and `X-Robots-Tag` in `_header
 - **Backups:** `STORE.exportData()` / `STORE.importData()` define the file format
   (`app: 'divide-and-conquer'`, `version: 1`). Changing stored fields means bumping the version and
   keeping older files importable.
-- **Theme:** `public/js/theme.js` loads in `<head>` and sets `data-theme` on `<html>`. Colours are
+- **Theme:** `public/js/theme.js` loads in `<head>` and sets `data-theme` on `<html>`. Colors are
   tokens in `public/css/style.css`, with the dark set under `:root[data-theme="dark"]`. Never hardcode a
-  colour in a page, stylesheet or script; the `theme-color` meta tags, the flag SVGs and the blue of the
+  color in a page, stylesheet or script; the `theme-color` meta tags, the flag SVGs and the blue of the
   tinkered.app logo are the only exceptions.
 - **Translations:** UI strings live in `public/js/translations.js` with matching `pl` and `en` keys.
   `tests/i18n.test.js` lists every page and checks that HTML fallback text matches the English
-  catalogue and that no string contains a long dash.
+  catalog and that no string contains a long dash.
 - **PWA:** `public/sw.js` precaches the `SHELL` list so every page works offline, even one the learner
   has never opened. Any file a page loads (HTML, CSS, JS, fonts, icons) must be in `SHELL`; files used
   only at install time, such as the maskable icon, do not need to be. Pages, scripts and styles are

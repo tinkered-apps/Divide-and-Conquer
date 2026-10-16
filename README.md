@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://divideconquer.tinkered.app/"><b>▶ Practise</b></a>
+  <a href="https://divideconquer.tinkered.app/"><b>▶ Practice</b></a>
   &nbsp;·&nbsp; English and Polish
   &nbsp;·&nbsp; installs as an app
   &nbsp;·&nbsp; works offline
@@ -41,7 +41,7 @@ Every fact (`7 × 8`, `56 ÷ 7`, `7 × _ = 56`) has its own mastery stage and du
 | Missing factor | `7 × _ = 49` |
 | Learn / review: multiplication | Quiz out loud with a parent or self-check, marking each fact *knows* or *needs practice* |
 | Learn / review: division | The same, for division |
-| Progress | A grid of every fact: remembered, learning, review due, not practised |
+| Progress | A grid of every fact: remembered, learning, review due, not practiced |
 
 ## Data
 

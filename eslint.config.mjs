@@ -8,7 +8,7 @@ import globals from 'globals';
 const shared = { TRANSLATIONS: 'readonly', I18N: 'readonly', STORE: 'readonly', LEARNING: 'readonly', THEME: 'readonly' };
 
 export default [
-  { ignores: ['node_modules/', 'test-results/', 'playwright-report/', '.wrangler/'] },
+  { ignores: ['node_modules/', 'test-results/', 'playwright-report/', '.wrangler/', '.marketing/'] },
 
   js.configs.recommended,
   {

@@ -9,7 +9,7 @@ const APP_VERSION = fs.readFileSync(path.resolve(__dirname, '../public/js/home.j
 
 async function addLearner(page, name = 'Ola') {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Who is practising?' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Who is practicing?' })).toBeVisible();
   await page.getByLabel('New here? Enter your name').fill(name);
   await page.getByRole('button', { name: 'Add learner' }).click();
   await expect(page.locator('#header-nick')).toHaveText(name);
@@ -23,10 +23,10 @@ test('learner picker keeps focus inside and activity tiles are links', async ({ 
 
   await page.getByLabel('New here? Enter your name').fill('Ola');
   await page.getByRole('button', { name: 'Add learner' }).click();
-  await expect(page.getByRole('link', { name: 'Multiplication: start practising' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Multiplication: start practicing' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Switch learner' }).click();
-  await expect(page.getByRole('dialog', { name: 'Who is practising?' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Who is practicing?' })).toBeVisible();
   await page.locator('#auth-modal').getByRole('button', { name: 'Close' }).click();
   await expect(page.getByRole('button', { name: 'Switch learner' })).toBeFocused();
 });
@@ -143,10 +143,10 @@ test('practice results show up in progress and stay after a reload', async ({ pa
 
   await page.goto('/progress');
   await expect(page.getByRole('heading', { name: 'Multiplication Mastery' })).toBeVisible();
-  const practised = page.locator('#mult-panel .cell:not([data-progress="none"])');
-  await expect(practised).not.toHaveCount(0);
+  const practiced = page.locator('#mult-panel .cell:not([data-progress="none"])');
+  await expect(practiced).not.toHaveCount(0);
   await page.reload();
-  await expect(practised).not.toHaveCount(0);
+  await expect(practiced).not.toHaveCount(0);
 });
 
 test('learn / review marks are saved on the device', async ({ page }) => {
@@ -208,7 +208,7 @@ test('switching and deleting learners', async ({ page }) => {
 
   page.once('dialog', dialog => dialog.accept());
   await page.getByRole('button', { name: 'Delete learner' }).click();
-  await expect(page.getByRole('heading', { name: 'Who is practising?' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Who is practicing?' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Tomek' })).toHaveCount(0);
   await page.getByRole('button', { name: 'Ola' }).click();
   await expect(page.locator('#header-nick')).toHaveText('Ola');
@@ -217,7 +217,7 @@ test('switching and deleting learners', async ({ page }) => {
 test('practice pages send a new visitor to the learner picker', async ({ page }) => {
   await page.goto('/division');
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByRole('heading', { name: 'Who is practising?' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Who is practicing?' })).toBeVisible();
 });
 
 test('the theme switch cycles light, dark and system', async ({ page }) => {
@@ -376,7 +376,7 @@ for (const theme of ['light', 'dark']) {
     };
 
     await page.goto('/');
-    await expect(page.getByRole('dialog', { name: 'Who is practising?' })).toBeVisible();
+    await expect(page.getByRole('dialog', { name: 'Who is practicing?' })).toBeVisible();
     await scan('learner picker');
     await addLearner(page);
     await scan('home');
