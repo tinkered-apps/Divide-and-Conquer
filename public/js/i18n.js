@@ -52,14 +52,12 @@ const I18N = (() => {
           <path fill="#fff" d="M0 0h30v10H0z"/>
           <path fill="#dc143c" d="M0 10h30v10H0z"/>
         </svg>`
-      : `<svg viewBox="0 0 60 30" aria-hidden="true">
-          <g>
-            <path fill="#012169" d="M0 0v30h60V0z"/>
-            <path stroke="#fff" stroke-width="6" d="m0 0 60 30m0-30L0 30"/>
-            <path stroke="#c8102e" stroke-width="4" d="m0 0 60 30m0-30L0 30"/>
-            <path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/>
-            <path stroke="#c8102e" stroke-width="6" d="M30 0v30M0 15h60"/>
-          </g>
+      : `<svg viewBox="0 0 38 20" aria-hidden="true">
+          <path fill="#b22234" d="M0 0h38v20H0z"/>
+          <path stroke="#fff" stroke-width="1.54" d="M0 2.31h38M0 5.38h38M0 8.46h38M0 11.54h38M0 14.62h38M0 17.69h38"/>
+          <path fill="#3c3b6e" d="M0 0h15.2v10.77H0z"/>
+          <path stroke="#fff" stroke-width="1.1" stroke-linecap="round"
+            d="M1.9 1.35h0m3.8 0h0m3.8 0h0m3.8 0h0M3.8 4.04h0m3.8 0h0m3.8 0h0M1.9 6.73h0m3.8 0h0m3.8 0h0m3.8 0h0M3.8 9.42h0m3.8 0h0m3.8 0h0"/>
         </svg>`;
     button.setAttribute('aria-label', t('language.switch'));
     button.title = t('language.switch');
